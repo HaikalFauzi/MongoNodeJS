@@ -14,8 +14,11 @@ async function main(){
         // Connect to the MongoDB cluster
         await client.connect();
  
-        // Make the appropriate DB calls
-        await  listDatabases(client);
+        const database= client.db("Chapter4");
+        const collection = database.collection("sample");
+
+        const res = await collection.find({course:"BENR"}).toArray()
+        console.log(res)
  
     } catch (e) {
         console.error(e);
